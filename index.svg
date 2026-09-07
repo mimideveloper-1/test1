@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%"
+     height="100%"
+     viewBox="0 0 1920 1080"
+     preserveAspectRatio="none">
+
+  <foreignObject x="0" y="0" width="100%" height="100%">
+
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          lang="en"
+          style="width:100%;height:100%;margin:0;">
+
+      <head>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0" />
+
+        <title>Clever</title>
+
+        <link rel="preconnect"
+              href="https://fonts.googleapis.com" />
+
+        <link rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossorigin="anonymous" />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&amp;family=Lexend:wght@100..900&amp;display=swap"
+          rel="stylesheet"
+        />
+
+        <style><![CDATA[
+
+          * {
+            box-sizing: border-box;
+          }
+
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+
+          :root {
+            --accent1: #9b59b6;
+            --accent2: #c084fc;
+            --theme-bg1: #000000;
+            --theme-bg2: #b700ff;
+
+            --navbar-bg: rgba(20,20,20,.7);
+            --navbar-border: rgba(255,255,255,.1);
+          }
+
+          body {
+            font-family: "Lexend", Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+            background: black;
+          }
+
+
+          /* BACKGROUND */
+
+          #bg {
+            position: fixed;
+            inset: 0;
+
+            z-index: 0;
+
+            overflow: hidden;
+
+            background:
+              linear-gradient(
+                135deg,
+                var(--theme-bg1),
+                var(--theme-bg2)
+              );
+          }
+
+          #bg::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+              rgba(0,0,0,.214);
+
+            pointer-events: none;
+
+            z-index: 2;
+          }
+
+
+          .background-video {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            z-index: 1;
+          }
+
+
+          /* PAGE IFRAME */
+
+          #pageFrame {
+            position: fixed;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border: none;
+
+            z-index: 50;
+
+            display: none;
+
+            background: white;
+          }
+
+
+          /* HOME */
+
+          #homeOverlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 20;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            pointer-events: none;
+          }
+
+
+          .panel {
+            width: 100%;
+            max-width: 700px;
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            pointer-events: auto;
+          }
+
+
+          /* LOGO */
+
+          .logo {
+            margin: 0;
+
+            font-family:
+              "Grandstander",
+              cursive;
+
+            font-size:
+              clamp(64px, 10vw, 110px);
+
+            font-weight: 300;
+
+            color: white;
+
+            letter-spacing: -5px;
+
+            text-shadow:
+              0 0 20px rgba(255,255,255,.1),
+              0 0 50px rgba(155,89,182,.3);
+          }
+
+
+          .logo span {
+            display: inline-block;
+          }
+
+
+          .logo span:nth-child(1) {
+            transform:
+              rotate(-6deg)
+              translateY(3px)
+              scaleY(1.08);
+          }
+
+
+          .logo span:nth-child(5) {
+            transform:
+              rotate(5deg)
+              translateY(-2px)
+              scaleY(.92);
+          }
+
+
+          /* BUTTONS */
+
+          .lower-options {
+            margin-top: 35px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 12px;
+          }
+
+
+          .quick-options {
+            border: 1px solid
+              rgba(192,132,252,.25);
+
+            border-radius: 40px;
+
+            padding:
+              14px
+              28px;
+
+            font-family:
+              "Grandstander",
+              cursive;
+
+            font-size: 20px;
+
+            color:
+              rgba(255,255,255,.85);
+
+            background:
+              rgba(82,82,82,.25);
+
+            cursor: pointer;
+
+            transition:
+              transform .2s,
+              background .2s,
+              box-shadow .2s;
+          }
+
+
+          .quick-options:hover {
+            transform:
+              translateY(-3px);
+
+            background:
+              rgba(155,89,182,.25);
+
+            box-shadow:
+              0 0 25px
+              rgba(155,89,182,.35);
+          }
+
+
+          /* NAVBAR */
+
+          .navbar {
+            position: fixed;
+
+            bottom: 15px;
+            left: 50%;
+
+            transform:
+              translateX(-50%);
+
+            display: flex;
+
+            gap: 8px;
+
+            padding:
+              8px
+              12px;
+
+            border-radius: 18px;
+
+            background:
+              var(--navbar-bg);
+
+            border:
+              1px solid
+              var(--navbar-border);
+
+            backdrop-filter:
+              blur(12px);
+
+            box-shadow:
+              0 0 25px
+              rgba(155,89,182,.35);
+
+            z-index: 100;
+          }
+
+
+          .nav-btn {
+            width: 42px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+              transparent;
+
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition:
+              background .2s,
+              transform .2s;
+          }
+
+
+          .nav-btn:hover {
+            background:
+              rgba(155,89,182,.25);
+
+            transform:
+              translateY(-2px);
+          }
+
+
+          .nav-btn-img {
+            width: 19px;
+            height: 19px;
+
+            object-fit: contain;
+
+            opacity: .85;
+          }
+
+
+          .nav-btn-game {
+            width: 22px;
+            height: 18px;
+
+            object-fit: contain;
+
+            opacity: .85;
+          }
+
+
+          /* FIREFLIES */
+
+          .firefly {
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 10;
+
+            animation:
+              fireflyMove
+              linear
+              infinite;
+          }
+
+
+          @keyframes fireflyMove {
+
+            0% {
+              transform:
+                translate(0,0)
+                scale(.8);
+
+              opacity: 0;
+            }
+
+            15% {
+              opacity: .7;
+            }
+
+            50% {
+              transform:
+                translate(80px,-100px)
+                scale(1);
+            }
+
+            100% {
+              transform:
+                translate(170px,-180px)
+                scale(.7);
+
+              opacity: 0;
+            }
+
+          }
+
+
+          /* SECRET */
+
+          #secret676767 {
+            position: fixed;
+            inset: 0;
+
+            z-index: 1000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            background: black;
+
+            color: white;
+
+            font-family:
+              "Grandstander",
+              cursive;
+
+            font-size: 40px;
+          }
+
+
+          #secret676767.active {
+            display: flex;
+          }
+
+
+          @media (max-width: 600px) {
+
+            .logo {
+              font-size: 64px;
+            }
+
+            .quick-options {
+              font-size: 18px;
+
+              padding:
+                12px
+                22px;
+            }
+
+            .navbar {
+              bottom: 10px;
+            }
+
+          }
+
+        ]]></style>
+
+      </head>
+
+
+      <body>
+
+        <!-- BACKGROUND -->
+
+        <div id="bg"></div>
+
+
+        <!-- PAGE FRAME -->
+
+        <iframe
+          id="pageFrame"
+          src="about:blank"
+          title="Page Content">
+        </iframe>
+
+
+        <!-- HOME -->
+
+        <div id="homeOverlay">
+
+          <div class="panel">
+
+            <h1 class="logo">
+              <span>e</span>
+              <span>c</span>
+              <span>l</span>
+              <span>i</span>
+              <span>p</span>
+              <span>s</span>
+              <span>e</span>
+            </h1>
+
+
+            <div class="lower-options">
+
+              <button
+                class="quick-options"
+                id="mathButton">
+
+                math
+
+              </button>
+
+
+              <button
+                class="quick-options"
+                id="researchButton">
+
+                research
+
+              </button>
+
+
+              <button
+                class="quick-options"
+                id="settingsButton">
+
+                settings
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- NAVBAR -->
+
+        <div class="navbar">
+
+
+          <button
+            class="nav-btn"
+            id="homeButton"
+            title="Home">
+
+            <img
+              src="/images/other images/house-solid.png"
+              class="nav-btn-img"
+              alt="Home" />
+
+          </button>
+
+
+          <button
+            class="nav-btn"
+            id="calcButton"
+            title="Math">
+
+            <img
+              src="/images/other images/calc.png"
+              class="nav-btn-game"
+              alt="Math" />
+
+          </button>
+
+
+          <button
+            class="nav-btn"
+            id="appsButton"
+            title="Apps">
+
+            <img
+              src="/images/other images/border-all-solid.png"
+              class="nav-btn-img"
+              alt="Apps" />
+
+          </button>
+
+
+          <button
+            class="nav-btn"
+            id="addButton"
+            title="Add">
+
+            <img
+              src="/images/other images/plus-solid.png"
+              class="nav-btn-img"
+              alt="Add" />
+
+          </button>
+
+
+          <button
+            class="nav-btn"
+            id="settingsNavButton"
+            title="Settings">
+
+            <img
+              src="/images/other images/settings.png"
+              class="nav-btn-img"
+              alt="Settings" />
+
+          </button>
+
+
+        </div>
+
+
+        <!-- SECRET -->
+
+        <div id="secret676767">
+          676767
+        </div>
+
+
+        <script><![CDATA[
+
+          (function () {
+
+            const pageFrame =
+              document.getElementById("pageFrame");
+
+            const homeOverlay =
+              document.getElementById("homeOverlay");
+
+
+            /* ===============================
+               PAGE SYSTEM
+            =============================== */
+
+            function switchPage(page) {
+
+              if (!page) return;
+
+
+              if (
+                page === "home.html" ||
+                page === "home"
+              ) {
+
+                pageFrame.src =
+                  "about:blank";
+
+                pageFrame.style.display =
+                  "none";
+
+                homeOverlay.style.display =
+                  "flex";
+
+                return;
+              }
+
+
+              homeOverlay.style.display =
+                "none";
+
+              pageFrame.style.display =
+                "block";
+
+              pageFrame.src =
+                page;
+
+            }
+
+
+            /* BUTTON EVENTS */
+
+            document
+              .getElementById("mathButton")
+              .addEventListener(
+                "click",
+                () => switchPage("g.html")
+              );
+
+
+            document
+              .getElementById("researchButton")
+              .addEventListener(
+                "click",
+                () => switchPage("b.html")
+              );
+
+
+            document
+              .getElementById("settingsButton")
+              .addEventListener(
+                "click",
+                () => switchPage("st.html")
+              );
+
+
+            document
+              .getElementById("homeButton")
+              .addEventListener(
+                "click",
+                () => switchPage("home.html")
+              );
+
+
+            document
+              .getElementById("calcButton")
+              .addEventListener(
+                "click",
+                () => switchPage("g.html")
+              );
+
+
+            document
+              .getElementById("appsButton")
+              .addEventListener(
+                "click",
+                () => switchPage("a.html")
+              );
+
+
+            document
+              .getElementById("addButton")
+              .addEventListener(
+                "click",
+                () => switchPage("c.html")
+              );
+
+
+            document
+              .getElementById("settingsNavButton")
+              .addEventListener(
+                "click",
+                () => switchPage("st.html")
+              );
+
+
+            /* ===============================
+               THEMES
+            =============================== */
+
+            const themes = {
+
+              default: {
+                accent1: "#9b59b6",
+                accent2: "#c084fc",
+                bg1: "#000000",
+                bg2: "#b700ff"
+              },
+
+              girly: {
+                accent1: "#ff69b4",
+                accent2: "#ffb6d9",
+                bg1: "#3a001f",
+                bg2: "#ff69b4"
+              },
+
+              hacker: {
+                accent1: "#00ff55",
+                accent2: "#00cc44",
+                bg1: "#000800",
+                bg2: "#003b15"
+              },
+
+              ocean: {
+                accent1: "#00aaff",
+                accent2: "#66ddff",
+                bg1: "#00101f",
+                bg2: "#0066aa"
+              },
+
+              forest: {
+                accent1: "#35c759",
+                accent2: "#8bdc8b",
+                bg1: "#031007",
+                bg2: "#176b2c"
+              },
+
+              sunset: {
+                accent1: "#ff512f",
+                accent2: "#dd2476",
+                bg1: "#200000",
+                bg2: "#ff512f"
+              },
+
+              purple: {
+                accent1: "#b026ff",
+                accent2: "#d580ff",
+                bg1: "#100020",
+                bg2: "#6a00a8"
+              },
+
+              cyber: {
+                accent1: "#ff00cc",
+                accent2: "#3333ff",
+                bg1: "#08000f",
+                bg2: "#330066"
+              },
+
+              red: {
+                accent1: "#ff2020",
+                accent2: "#ff6666",
+                bg1: "#120000",
+                bg2: "#8b0000"
+              },
+
+              midnight: {
+                accent1: "#4d6cff",
+                accent2: "#7289ff",
+                bg1: "#020024",
+                bg2: "#090979"
+              },
+
+              ice: {
+                accent1: "#66e6ff",
+                accent2: "#b8f5ff",
+                bg1: "#00151c",
+                bg2: "#006b7a"
+              },
+
+              gold: {
+                accent1: "#ffd700",
+                accent2: "#fff09a",
+                bg1: "#160e00",
+                bg2: "#806000"
+              },
+
+              cherry: {
+                accent1: "#ff1744",
+                accent2: "#ff6685",
+                bg1: "#180006",
+                bg2: "#8b001c"
+              },
+
+              lavender: {
+                accent1: "#c77dff",
+                accent2: "#e0aaff",
+                bg1: "#100818",
+                bg2: "#5a189a"
+              },
+
+              neon: {
+                accent1: "#00ffea",
+                accent2: "#ff00ff",
+                bg1: "#000b12",
+                bg2: "#260026"
+              },
+
+              coffee: {
+                accent1: "#d2691e",
+                accent2: "#f4a460",
+                bg1: "#100804",
+                bg2: "#5c2e0e"
+              },
+
+              emerald: {
+                accent1: "#00c878",
+                accent2: "#63ffb5",
+                bg1: "#00140e",
+                bg2: "#006b43"
+              }
+
+            };
+
+
+            /* ===============================
+               APPLY THEME
+            =============================== */
+
+            function applyTheme() {
+
+              let themeName =
+                localStorage.getItem(
+                  "selectedTheme"
+                );
+
+              if (
+                !themeName ||
+                !themes[themeName]
+              ) {
+                themeName = "default";
+              }
+
+
+              const theme =
+                themes[themeName];
+
+
+              document.documentElement.style
+                .setProperty(
+                  "--accent1",
+                  theme.accent1
+                );
+
+
+              document.documentElement.style
+                .setProperty(
+                  "--accent2",
+                  theme.accent2
+                );
+
+
+              document.documentElement.style
+                .setProperty(
+                  "--theme-bg1",
+                  theme.bg1
+                );
+
+
+              document.documentElement.style
+                .setProperty(
+                  "--theme-bg2",
+                  theme.bg2
+                );
+
+            }
+
+
+            /* ===============================
+               BACKGROUND
+            =============================== */
+
+            function applyBackground() {
+
+              const bg =
+                document.getElementById("bg");
+
+              if (!bg) return;
+
+
+              let type =
+                localStorage.getItem("bgType");
+
+              let value =
+                localStorage.getItem("bgValue");
+
+
+              if (!type) {
+
+                type = "video";
+
+                value =
+                  "/background-imgs/OMORILAB ORIGINAL ANIMATION MEME 3333.mp4";
+
+              }
+
+
+              const oldVideo =
+                bg.querySelector(
+                  ".background-video"
+                );
+
+              if (oldVideo) {
+
+                oldVideo.pause();
+
+                oldVideo.remove();
+
+              }
+
+
+              let themeName =
+                localStorage.getItem(
+                  "selectedTheme"
+                ) || "default";
+
+
+              const theme =
+                themes[themeName] ||
+                themes.default;
+
+
+              if (type === "none") {
+
+                bg.style.background =
+                  `linear-gradient(
+                    135deg,
+                    ${theme.bg1},
+                    ${theme.bg2}
+                  )`;
+
+                return;
+
+              }
+
+
+              if (type === "color") {
+
+                bg.style.background =
+                  value || "#000000";
+
+                return;
+
+              }
+
+
+              if (type === "image") {
+
+                bg.style.background =
+                  value
+                    ? `url("${value}") center/cover no-repeat`
+                    : "#000000";
+
+                return;
+
+              }
+
+
+              if (type === "video") {
+
+                if (!value) {
+
+                  bg.style.background =
+                    "#000000";
+
+                  return;
+
+                }
+
+
+                bg.style.background =
+                  "#000000";
+
+
+                const video =
+                  document.createElement(
+                    "video"
+                  );
+
+
+                video.className =
+                  "background-video";
+
+                video.src =
+                  value;
+
+                video.autoplay =
+                  true;
+
+                video.loop =
+                  true;
+
+                video.muted =
+                  true;
+
+                video.playsInline =
+                  true;
+
+
+                bg.appendChild(
+                  video
+                );
+
+
+                video.play()
+                  .catch(() => {});
+
+              }
+
+            }
+
+
+            /* ===============================
+               FIREFLIES
+            =============================== */
+
+            function createStars(color) {
+
+              document
+                .querySelectorAll(".firefly")
+                .forEach(
+                  star => star.remove()
+                );
+
+
+              for (
+                let i = 0;
+                i < 90;
+                i++
+              ) {
+
+                const star =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                star.className =
+                  "firefly";
+
+
+                const size =
+                  Math.random() * 3 + 1;
+
+
+                star.style.width =
+                  size + "px";
+
+                star.style.height =
+                  size + "px";
+
+                star.style.background =
+                  color;
+
+
+                star.style.left =
+                  Math.random() *
+                  window.innerWidth +
+                  "px";
+
+
+                star.style.top =
+                  Math.random() *
+                  window.innerHeight +
+                  "px";
+
+
+                const duration =
+                  Math.random() * 8 + 6;
+
+
+                star.style.animationDuration =
+                  duration + "s";
+
+
+                star.style.animationDelay =
+                  -(Math.random() * duration) + "s";
+
+
+                document.body.appendChild(
+                  star
+                );
+
+              }
+
+            }
+
+
+            /* ===============================
+               CLOAK
+            =============================== */
+
+            function applyCloakSettings() {
+
+              const title =
+                localStorage.getItem(
+                  "cloakTitle"
+                );
+
+
+              const icon =
+                localStorage.getItem(
+                  "cloakIcon"
+                );
+
+
+              if (title) {
+
+                document.title =
+                  title;
+
+              }
+
+
+              if (icon) {
+
+                let link =
+                  document.querySelector(
+                    'link[rel="icon"]'
+                  );
+
+
+                if (!link) {
+
+                  link =
+                    document.createElement(
+                      "link"
+                    );
+
+                  link.rel =
+                    "icon";
+
+                  document.head.appendChild(
+                    link
+                  );
+
+                }
+
+
+                link.href =
+                  icon;
+
+              }
+
+            }
+
+
+            /* ===============================
+               SECRET CODE
+            =============================== */
+
+            let secretCode = "";
+
+
+            document.addEventListener(
+              "keydown",
+              function(event) {
+
+                if (
+                  event.key.length !== 1
+                ) {
+                  return;
+                }
+
+
+                secretCode +=
+                  event.key;
+
+
+                if (
+                  secretCode.length > 6
+                ) {
+
+                  secretCode =
+                    secretCode.slice(-6);
+
+                }
+
+
+                if (
+                  secretCode === "676767"
+                ) {
+
+                  const secret =
+                    document.getElementById(
+                      "secret676767"
+                    );
+
+
+                  secret.classList.add(
+                    "active"
+                  );
+
+
+                  setTimeout(
+                    () => {
+
+                      secret.classList.remove(
+                        "active"
+                      );
+
+                    },
+                    2000
+                  );
+
+
+                  secretCode = "";
+
+                }
+
+              }
+            );
+
+
+            /* ===============================
+               START
+            =============================== */
+
+            function applySettings() {
+
+              applyTheme();
+
+              applyBackground();
+
+              applyCloakSettings();
+
+
+              const themeName =
+                localStorage.getItem(
+                  "selectedTheme"
+                ) || "default";
+
+
+              const theme =
+                themes[themeName] ||
+                themes.default;
+
+
+              createStars(
+                theme.accent2
+              );
+
+            }
+
+
+            window.addEventListener(
+              "storage",
+              function() {
+
+                applySettings();
+
+              }
+            );
+
+
+            applySettings();
+
+
+            pageFrame.style.display =
+              "none";
+
+
+            homeOverlay.style.display =
+              "flex";
+
+          })();
+
+        ]]></script>
+
+      </body>
+
+    </html>
+
+  </foreignObject>
+
+</svg>
