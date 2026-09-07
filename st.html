@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clever</title>
+
+
+<link
+    rel="icon"
+    type="image/png"
+    href="https://th.bing.com/th/id/ODF.cCsv-cCt-jkEcwiJYMYj4A?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2"
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300;500;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+    :root {
+        --accent1: #9b59b6;
+        --accent2: #c084fc;
+        --theme-bg1: #000000;
+        --theme-bg2: #b700ff;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        overflow-x: hidden;
+        font-family: "Grandstander", cursive;
+        color: white;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    #bg {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            var(--theme-bg1),
+            var(--theme-bg2)
+        );
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    .background-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* =========================
+       STARS
+    ========================= */
+
+    #starContainer {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .star {
+        position: absolute;
+        border-radius: 50%;
+        background: white;
+        opacity: 0.4;
+        animation: twinkle infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+        0%, 100% {
+            opacity: 0.2;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.9;
+            transform: scale(1.4);
+        }
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .page {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        padding: 40px 0;
+    }
+
+    .panel {
+        width: min(600px, 90vw);
+        padding: 30px;
+        border-radius: 18px;
+        background: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .panel button {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(73, 73, 73, 0.144);
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: "Grandstander", cursive;
+    }
+
+    .panel button:hover {
+        background: rgba(255, 255, 255, 0.16);
+        transform: translateY(-2px);
+    }
+
+    .panel button:active {
+        transform: scale(0.98);
+    }
+
+    /* =========================
+       GROUPS
+    ========================= */
+
+    .group {
+        width: 100%;
+        padding: 12px;
+        border-radius: 20px;
+        background: rgba(0, 0, 0, 0.096);
+        margin: 20px 0;
+        font-family: "Grandstander", cursive;
+        box-sizing: border-box;
+    }
+
+    .group h2 {
+        text-align: center;
+    }
+
+    /* =========================
+       SMALL BUTTONS
+    ========================= */
+
+    .small {
+        width: 42px;
+        height: 30px;
+        padding: 0;
+        border-radius: 8px;
+    }
+
+    .nf {
+        background-color: rgba(255, 255, 255, 0.151);
+        border-color: white;
+        color: white;
+        font-family: "Grandstander", cursive;
+    }
+
+    .random-input {
+        font-family: "Grandstander", cursive;
+        background-color: rgba(255, 255, 255, 0.18);
+    }
+
+    /* =========================
+       INPUTS
+    ========================= */
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        text-align: center;
+        box-sizing: border-box;
+        font-family: "Grandstander", cursive;
+    }
+
+    /* =========================
+       SETTINGS
+    ========================= */
+
+    .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(100px, 1fr)
+        );
+        gap: 12px;
+        width: 100%;
+        max-width: 620px;
+        height: 420px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 6px;
+        margin: auto;
+    }
+
+    .setting-btn {
+        max-width: 170px;
+        min-height: 70px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        font-size: 12px;
+        gap: 3px;
+        font-family: "Grandstander", cursive;
+    }
+
+    .setting-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .setting-btn.active {
+        border: 1px solid rgba(110, 190, 255, 0.95);
+        box-shadow:
+            0 0 12px rgba(110, 190, 255, 0.35),
+            0 0 24px rgba(110, 190, 255, 0.18),
+            inset 0 0 12px rgba(110, 190, 255, 0.08);
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 10px;
+    }
+
+    .button-container button {
+        flex: 1 1 120px;
+        min-width: 120px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: "Grandstander", cursive;
+    }
+
+    .button-container button:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* =========================
+       THEME BUTTONS
+    ========================= */
+
+    .theme-btn {
+        min-height: 75px !important;
+        font-size: 14px !important;
+        font-weight: 600;
+    }
+
+    .theme-preview {
+        width: 45px;
+        height: 15px;
+        border-radius: 20px;
+        margin-bottom: 4px;
+    }
+
+    .theme-default .theme-preview {
+        background: linear-gradient(90deg, #000, #b700ff);
+    }
+
+    .theme-girly .theme-preview {
+        background: linear-gradient(90deg, #ff69b4, #ffb6d9);
+    }
+
+    .theme-hacker .theme-preview {
+        background: linear-gradient(90deg, #001a00, #00ff55);
+    }
+
+    .theme-ocean .theme-preview {
+        background: linear-gradient(90deg, #001f3f, #00aaff);
+    }
+
+    .theme-forest .theme-preview {
+        background: linear-gradient(90deg, #071a0b, #238636);
+    }
+
+    .theme-sunset .theme-preview {
+        background: linear-gradient(90deg, #ff512f, #dd2476);
+    }
+
+    .theme-purple .theme-preview {
+        background: linear-gradient(90deg, #4b0082, #b026ff);
+    }
+
+    .theme-cyber .theme-preview {
+        background: linear-gradient(90deg, #ff00cc, #3333ff);
+    }
+
+    .theme-red .theme-preview {
+        background: linear-gradient(90deg, #3a0000, #ff2020);
+    }
+
+    .theme-midnight .theme-preview {
+        background: linear-gradient(90deg, #020024, #090979);
+    }
+
+    .theme-ice .theme-preview {
+        background: linear-gradient(90deg, #003b46, #66e6ff);
+    }
+
+    .theme-gold .theme-preview {
+        background: linear-gradient(90deg, #3d2800, #ffd700);
+    }
+
+    .theme-cherry .theme-preview {
+        background: linear-gradient(90deg, #250008, #d90429);
+    }
+
+    .theme-lavender .theme-preview {
+        background: linear-gradient(90deg, #301934, #c77dff);
+    }
+
+    .theme-neon .theme-preview {
+        background: linear-gradient(90deg, #00ffea, #ff00ff);
+    }
+
+    .theme-coffee .theme-preview {
+        background: linear-gradient(90deg, #1b0f08, #8b4513);
+    }
+
+    .theme-emerald .theme-preview {
+        background: linear-gradient(90deg, #001f16, #00c878);
+    }
+
+    /* =========================
+       OVERLAY
+    ========================= */
+
+    #overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999999999;
+        background: black;
+        opacity: 1;
+        transition: opacity 0.6s ease;
+    }
+
+    #overlay.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+/* =========================
+   DARK BACKGROUND OVERLAY
+========================= */
+
+#bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.214);
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Keep videos behind the dark overlay */
+.background-video {
+    z-index: 0 !important;
+}
+
+/* Content stays above everything */
+.page {
+    z-index: 3 !important;
+}
+
+#starContainer {
+    z-index: 2 !important;
+}
+
+
+    #introFrame {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    #clickLayer {
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    /* =========================
+       INACTIVE TAB OVERLAY
+    ========================= */
+
+    #inactiveOverlay {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 999999999;
+        display: none;
+        pointer-events: none;
+    }
+
+    #inactiveOverlay.active {
+        display: block;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- BACKGROUND -->
+<div id="bg"></div>
+
+<!-- STARS -->
+<div id="starContainer"></div>
+
+<!-- CONTENT -->
+<div class="page">
+    <div class="panel">
+
+        <h1>settings</h1>
+
+        <button onclick="location.href='home.html'">
+            ⬅ Back
+        </button>
+
+        <button onclick="openBlank()">
+            Open in about:blank
+        </button>
+
+        <button onclick="convertToBlob()">
+            Open in
+        </button>
+
+        <!-- =========================
+             THEMES
+        ========================= -->
+
+        <div class="group">
+            <h2>Themes</h2>
+
+            <div class="button-container">
+
+                <button
+                    class="setting-btn theme-btn theme-default"
+                    data-theme="default"
+                    onclick="setTheme('default')"
+                >
+                    <div class="theme-preview"></div>
+                    Default
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-girly"
+                    data-theme="girly"
+                    onclick="setTheme('girly')"
+                >
+                    <div class="theme-preview"></div>
+                    💗 Girly
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-hacker"
+                    data-theme="hacker"
+                    onclick="setTheme('hacker')"
+                >
+                    <div class="theme-preview"></div>
+                    💻 Hacker
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-ocean"
+                    data-theme="ocean"
+                    onclick="setTheme('ocean')"
+                >
+                    <div class="theme-preview"></div>
+                    🌊 Ocean
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-forest"
+                    data-theme="forest"
+                    onclick="setTheme('forest')"
+                >
+                    <div class="theme-preview"></div>
+                    🌲 Forest
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-sunset"
+                    data-theme="sunset"
+                    onclick="setTheme('sunset')"
+                >
+                    <div class="theme-preview"></div>
+                    🌅 Sunset
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-purple"
+                    data-theme="purple"
+                    onclick="setTheme('purple')"
+                >
+                    <div class="theme-preview"></div>
+                    💜 Purple
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-cyber"
+                    data-theme="cyber"
+                    onclick="setTheme('cyber')"
+                >
+                    <div class="theme-preview"></div>
+                    🟣 Cyber
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-red"
+                    data-theme="red"
+                    onclick="setTheme('red')"
+                >
+                    <div class="theme-preview"></div>
+                    ❤️ Red
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-midnight"
+                    data-theme="midnight"
+                    onclick="setTheme('midnight')"
+                >
+                    <div class="theme-preview"></div>
+                    🌌 Midnight
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-ice"
+                    data-theme="ice"
+                    onclick="setTheme('ice')"
+                >
+                    <div class="theme-preview"></div>
+                    🧊 Ice
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-gold"
+                    data-theme="gold"
+                    onclick="setTheme('gold')"
+                >
+                    <div class="theme-preview"></div>
+                    ⭐ Gold
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-cherry"
+                    data-theme="cherry"
+                    onclick="setTheme('cherry')"
+                >
+                    <div class="theme-preview"></div>
+                    🍒 Cherry
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-lavender"
+                    data-theme="lavender"
+                    onclick="setTheme('lavender')"
+                >
+                    <div class="theme-preview"></div>
+                    🪻 Lavender
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-neon"
+                    data-theme="neon"
+                    onclick="setTheme('neon')"
+                >
+                    <div class="theme-preview"></div>
+                    ⚡ Neon
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-coffee"
+                    data-theme="coffee"
+                    onclick="setTheme('coffee')"
+                >
+                    <div class="theme-preview"></div>
+                    ☕ Coffee
+                </button>
+
+                <button
+                    class="setting-btn theme-btn theme-emerald"
+                    data-theme="emerald"
+                    onclick="setTheme('emerald')"
+                >
+                    <div class="theme-preview"></div>
+                    💚 Emerald
+                </button>
+
+            </div>
+        </div>
+
+        <!-- =========================
+             BACKGROUNDS
+        ========================= -->
+
+        <div class="group">
+            <h2>Backgrounds</h2>
+
+            <div class="button-container">
+
+                <!-- NONE -->
+                <button
+                    class="setting-btn"
+                    data-type="none"
+                    data-bg=""
+                    onclick="setBackground('none')"
+                >
+                    None
+                </button>
+
+                <!-- OMORI VIDEO -->
+                <button
+                    class="setting-btn"
+                    data-type="video"
+                    data-bg="/background-imgs/OMORILAB ORIGINAL ANIMATION MEME 3333.mp4"
+                    onclick="setBackground(
+                        'video',
+                        '/background-imgs/OMORILAB ORIGINAL ANIMATION MEME 3333.mp4'
+                    )"
+                >
+                    Default
+                </button>
+
+                <!-- SIGEON -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/sigeon.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/sigeon.gif'
+                    )"
+                >
+                    Sigeon pex
+                </button>
+
+                <!-- SQUIRREL -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/squirrel.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/squirrel.gif'
+                    )"
+                >
+                    Dancing Squirrel
+                </button>
+
+                <!-- BATTLE -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/battle.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/battle.gif'
+                    )"
+                >
+                    King of Island vs King of Mansion
+                </button>
+
+                <!-- TETO -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/teto.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/teto.gif'
+                    )"
+                >
+                    Teto
+                </button>
+
+                <!-- CAT BATTLE -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/cat-battle.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/cat-battle.gif'
+                    )"
+                >
+                    Cat Battle
+                </button>
+
+                <!-- MINECRAFT CAT -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/catt.gif"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/catt.gif'
+                    )"
+                >
+                    Chill Minecraft Cat
+                </button>
+
+                <!-- MIMI -->
+                <button
+                    class="setting-btn"
+                    data-type="image"
+                    data-bg="/background-imgs/mimicrop.png"
+                    onclick="setBackground(
+                        'image',
+                        '/background-imgs/mimicrop.png'
+                    )"
+                >
+                    Mimi
+                </button>
+
+            </div>
+        </div>
+
+        <!-- =========================
+             TAB CLOAK
+        ========================= -->
+
+        <div class="group">
+            <h2>Tab Cloak</h2>
+
+            <select
+                class="random-input"
+                id="cloakPreset"
+            >
+                <option value="clever">Clever</option>
+                <option value="google">Google</option>
+                <option value="classroom">Classroom</option>
+                <option value="drive">Drive</option>
+                <option value="docs">Docs</option>
+                <option value="bing">Bing</option>
+                <option value="youtube">YouTube</option>
+                <option value="khan">Khan Academy</option>
+                <option value="edmodo">Edmodo</option>
+            </select>
+
+            <input
+                id="titleInput"
+                class="nf"
+                placeholder="Custom Title"
+            >
+
+            <input
+                id="iconInput"
+                class="nf"
+                placeholder="Favicon URL"
+            >
+
+            <button
+                class="nf"
+                onclick="applyCloak()"
+            >
+                Apply Cloak
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- =========================
+     THEME SYSTEM
+========================= -->
+
+<script>
+    const themes = {
+        default: {
+            accent1: "#9b59b6",
+            accent2: "#c084fc",
+            bg1: "#000000",
+            bg2: "#b700ff"
+        },
+
+        girly: {
+            accent1: "#ff69b4",
+            accent2: "#ffb6d9",
+            bg1: "#3a001f",
+            bg2: "#ff69b4"
+        },
+
+        hacker: {
+            accent1: "#00ff55",
+            accent2: "#00cc44",
+            bg1: "#000800",
+            bg2: "#003b15"
+        },
+
+        ocean: {
+            accent1: "#00aaff",
+            accent2: "#66ddff",
+            bg1: "#00101f",
+            bg2: "#0066aa"
+        },
+
+        forest: {
+            accent1: "#35c759",
+            accent2: "#8bdc8b",
+            bg1: "#031007",
+            bg2: "#176b2c"
+        },
+
+        sunset: {
+            accent1: "#ff512f",
+            accent2: "#dd2476",
+            bg1: "#200000",
+            bg2: "#ff512f"
+        },
+
+        purple: {
+            accent1: "#b026ff",
+            accent2: "#d580ff",
+            bg1: "#100020",
+            bg2: "#6a00a8"
+        },
+
+        cyber: {
+            accent1: "#ff00cc",
+            accent2: "#3333ff",
+            bg1: "#08000f",
+            bg2: "#330066"
+        },
+
+        red: {
+            accent1: "#ff2020",
+            accent2: "#ff6666",
+            bg1: "#120000",
+            bg2: "#8b0000"
+        },
+
+        midnight: {
+            accent1: "#4d6cff",
+            accent2: "#7289ff",
+            bg1: "#020024",
+            bg2: "#090979"
+        },
+
+        ice: {
+            accent1: "#66e6ff",
+            accent2: "#b8f5ff",
+            bg1: "#00151c",
+            bg2: "#006b7a"
+        },
+
+        gold: {
+            accent1: "#ffd700",
+            accent2: "#fff09a",
+            bg1: "#160e00",
+            bg2: "#806000"
+        },
+
+        cherry: {
+            accent1: "#ff1744",
+            accent2: "#ff6685",
+            bg1: "#180006",
+            bg2: "#8b001c"
+        },
+
+        lavender: {
+            accent1: "#c77dff",
+            accent2: "#e0aaff",
+            bg1: "#100818",
+            bg2: "#5a189a"
+        },
+
+        neon: {
+            accent1: "#00ffea",
+            accent2: "#ff00ff",
+            bg1: "#000b12",
+            bg2: "#260026"
+        },
+
+        coffee: {
+            accent1: "#d2691e",
+            accent2: "#f4a460",
+            bg1: "#100804",
+            bg2: "#5c2e0e"
+        },
+
+        emerald: {
+            accent1: "#00c878",
+            accent2: "#63ffb5",
+            bg1: "#00140e",
+            bg2: "#006b43"
+        }
+    };
+
+    /*
+     * Apply the currently selected theme.
+     *
+     * IMPORTANT:
+     * The theme is ALWAYS applied, even when the
+     * background type is "none".
+     *
+     * "none" only means:
+     * no image / GIF / video.
+     *
+     * The theme gradient still remains visible.
+     */
+
+    function setTheme(themeName) {
+        const theme = themes[themeName];
+
+        if (!theme) return;
+
+        localStorage.setItem(
+            "selectedTheme",
+            themeName
+        );
+
+        applyTheme();
+        applyBackground();
+    }
+
+    function applyTheme() {
+        const themeName =
+            localStorage.getItem("selectedTheme") ||
+            "default";
+
+        const theme =
+            themes[themeName] ||
+            themes.default;
+
+        document.documentElement.style.setProperty(
+            "--accent1",
+            theme.accent1
+        );
+
+        document.documentElement.style.setProperty(
+            "--accent2",
+            theme.accent2
+        );
+
+        document.documentElement.style.setProperty(
+            "--theme-bg1",
+            theme.bg1
+        );
+
+        document.documentElement.style.setProperty(
+            "--theme-bg2",
+            theme.bg2
+        );
+
+        /*
+         * If the user has "None" selected,
+         * explicitly show the selected theme gradient.
+         *
+         * This is the important fix.
+         */
+
+        const bg =
+            document.getElementById("bg");
+
+        if (bg) {
+            const bgType =
+                localStorage.getItem("bgType");
+
+            if (
+                bgType === "none" ||
+                !bgType
+            ) {
+                bg.style.background =
+                    `linear-gradient(
+                        135deg,
+                        ${theme.bg1},
+                        ${theme.bg2}
+                    )`;
+
+                bg.style.backgroundImage =
+                    `linear-gradient(
+                        135deg,
+                        ${theme.bg1},
+                        ${theme.bg2}
+                    )`;
+
+                bg.style.backgroundColor =
+                    "transparent";
+            }
+        }
+
+        updateThemeButtons();
+    }
+
+    function updateThemeButtons() {
+        const current =
+            localStorage.getItem(
+                "selectedTheme"
+            ) || "default";
+
+        document
+            .querySelectorAll("[data-theme]")
+            .forEach(button => {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.theme === current
+                );
+            });
+    }
+</script>
+
+<!-- =========================
+     BACKGROUND SYSTEM
+========================= -->
+
+<script>
+
+    function setBackground(
+        type,
+        value = ""
+    ) {
+
+        /*
+         * Store the background separately
+         * from the theme.
+         */
+
+        localStorage.setItem(
+            "bgType",
+            type
+        );
+
+        localStorage.setItem(
+            "bgValue",
+            value
+        );
+
+        localStorage.setItem(
+            "activeBackground",
+            value || type
+        );
+
+        applyBackground();
+        updateActiveBackgroundButton();
+    }
+
+    function updateActiveBackgroundButton() {
+
+        const type =
+            localStorage.getItem(
+                "bgType"
+            ) || "none";
+
+        const value =
+            localStorage.getItem(
+                "bgValue"
+            ) || "";
+
+        document
+            .querySelectorAll(
+                ".button-container .setting-btn"
+            )
+            .forEach(button => {
+
+                if (
+                    button.hasAttribute(
+                        "data-type"
+                    )
+                ) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                    const buttonType =
+                        button.dataset.type || "";
+
+                    const buttonValue =
+                        button.dataset.bg || "";
+
+                    if (
+                        buttonType === type &&
+                        buttonValue === value
+                    ) {
+                        button.classList.add(
+                            "active"
+                        );
+                    }
+                }
+            });
+    }
+
+    function applyBackground() {
+
+        let type =
+            localStorage.getItem(
+                "bgType"
+            );
+
+        let value =
+            localStorage.getItem(
+                "bgValue"
+            );
+
+        /*
+         * NEW USERS:
+         *
+         * If no background has ever been
+         * selected, use the OMORILAB video.
+         */
+
+        if (!type) {
+
+            type = "video";
+
+            value =
+                "/background-imgs/OMORILAB ORIGINAL ANIMATION MEME 3333.mp4";
+
+            localStorage.setItem(
+                "bgType",
+                type
+            );
+
+            localStorage.setItem(
+                "bgValue",
+                value
+            );
+        }
+
+        const bg =
+            document.getElementById("bg");
+
+        if (!bg) return;
+
+        /*
+         * Remove old video first.
+         */
+
+        const oldVideo =
+            bg.querySelector(
+                ".background-video"
+            );
+
+        if (oldVideo) {
+            oldVideo.pause();
+            oldVideo.remove();
+        }
+
+        /*
+         * Clear old background.
+         */
+
+        bg.style.background = "none";
+        bg.style.backgroundImage = "none";
+        bg.style.backgroundColor = "transparent";
+
+        /*
+         * =========================
+         * NONE
+         * =========================
+         *
+         * IMPORTANT:
+         *
+         * None does NOT mean white.
+         *
+         * None means:
+         * "Don't use a custom image/video."
+         *
+         * The selected theme gradient
+         * remains visible.
+         */
+
+        if (type === "none") {
+
+            const themeName =
+                localStorage.getItem(
+                    "selectedTheme"
+                ) || "default";
+
+            const theme =
+                themes[themeName] ||
+                themes.default;
+
+            bg.style.background =
+                `linear-gradient(
+                    135deg,
+                    ${theme.bg1},
+                    ${theme.bg2}
+                )`;
+
+            bg.style.backgroundImage =
+                `linear-gradient(
+                    135deg,
+                    ${theme.bg1},
+                    ${theme.bg2}
+                )`;
+
+            bg.style.backgroundColor =
+                "transparent";
+
+            return;
+        }
+
+        /*
+         * If there is no value,
+         * fall back to the theme.
+         */
+
+        if (!value) {
+
+            const themeName =
+                localStorage.getItem(
+                    "selectedTheme"
+                ) || "default";
+
+            const theme =
+                themes[themeName] ||
+                themes.default;
+
+            bg.style.background =
+                `linear-gradient(
+                    135deg,
+                    ${theme.bg1},
+                    ${theme.bg2}
+                )`;
+
+            return;
+        }
+
+        /*
+         * =========================
+         * IMAGE
+         * =========================
+         */
+
+        if (type === "image") {
+
+            bg.style.background =
+                `url("${value}") center/cover no-repeat`;
+
+            return;
+        }
+
+        /*
+         * =========================
+         * VIDEO
+         * =========================
+         */
+
+        if (type === "video") {
+
+            const video =
+                document.createElement(
+                    "video"
+                );
+
+            video.className =
+                "background-video";
+
+            video.src = value;
+
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.preload = "auto";
+
+            video.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            bg.appendChild(video);
+
+            video.play().catch(() => {});
+
+            /*
+             * If the video fails,
+             * show the selected theme
+             * instead of leaving a blank page.
+             */
+
+            video.addEventListener(
+                "error",
+                () => {
+
+                    video.remove();
+
+                    const themeName =
+                        localStorage.getItem(
+                            "selectedTheme"
+                        ) || "default";
+
+                    const theme =
+                        themes[themeName] ||
+                        themes.default;
+
+                    bg.style.background =
+                        `linear-gradient(
+                            135deg,
+                            ${theme.bg1},
+                            ${theme.bg2}
+                        )`;
+
+                    bg.style.backgroundImage =
+                        `linear-gradient(
+                            135deg,
+                            ${theme.bg1},
+                            ${theme.bg2}
+                        )`;
+                }
+            );
+
+            return;
+        }
+    }
+
+    /*
+     * Apply everything once the page loads.
+     */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            applyTheme();
+            applyBackground();
+            updateActiveBackgroundButton();
+            updateThemeButtons();
+
+        }
+    );
+
+</script>
+
+<!-- =========================
+     STARS
+========================= -->
+
+<script>
+
+    function createStars() {
+
+        const container =
+            document.getElementById(
+                "starContainer"
+            );
+
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        for (
+            let i = 0;
+            i < 140;
+            i++
+        ) {
+
+            const star =
+                document.createElement(
+                    "div"
+                );
+
+            star.className = "star";
+
+            const size =
+                Math.random() * 2 + 1;
+
+            star.style.width =
+                size + "px";
+
+            star.style.height =
+                size + "px";
+
+            star.style.top =
+                Math.random() *
+                window.innerHeight +
+                "px";
+
+            star.style.left =
+                Math.random() *
+                window.innerWidth +
+                "px";
+
+            star.style.animationDuration =
+                Math.random() * 3 + 2 +
+                "s";
+
+            container.appendChild(star);
+        }
+    }
+
+    createStars();
+
+</script>
+
+<!-- =========================
+     TAB CLOAK
+========================= -->
+
+<script>
+
+    const presets = {
+
+        clever: {
+            title: "Clever",
+            icon: "https://th.bing.com/th/id/ODF.cCsv-cCt-jkEcwiJYMYj4A?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2"
+        },
+
+        google: {
+            title: "Google",
+            icon: "https://www.google.com/favicon.ico"
+        },
+
+        classroom: {
+            title: "Classroom",
+            icon: "https://ssl.gstatic.com/classroom/favicon.png"
+        },
+
+        drive: {
+            title: "Drive",
+            icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png"
+        },
+
+        docs: {
+            title: "Docs",
+            icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+        },
+
+        bing: {
+            title: "Bing",
+            icon: "https://www.bing.com/sa/simg/favicon-2x.ico"
+        },
+
+        youtube: {
+            title: "YouTube",
+            icon: "https://www.youtube.com/s/desktop/7cf77294/img/favicon_32x32.png"
+        },
+
+        khan: {
+            title: "Khan Academy",
+            icon: "https://www.khanacademy.org/favicon.ico"
+        },
+
+        edmodo: {
+            title: "Edmodo",
+            icon: "https://cdn.edmodo.com/favicon.ico"
+        }
+    };
+
+    const cloakPreset =
+        document.getElementById(
+            "cloakPreset"
+        );
+
+    if (cloakPreset) {
+
+        cloakPreset.addEventListener(
+            "change",
+            function () {
+
+                const val =
+                    this.value;
+
+                if (presets[val]) {
+
+                    document.getElementById(
+                        "titleInput"
+                    ).value =
+                        presets[val].title;
+
+                    document.getElementById(
+                        "iconInput"
+                    ).value =
+                        presets[val].icon;
+
+                    applyCloak();
+                }
+            }
+        );
+    }
+
+    function applyCloak() {
+
+        const title =
+            document.getElementById(
+                "titleInput"
+            ).value;
+
+        const icon =
+            document.getElementById(
+                "iconInput"
+            ).value;
+
+        if (title) {
+
+            document.title =
+                title;
+
+            localStorage.setItem(
+                "cloakTitle",
+                title
+            );
+        }
+
+        if (icon) {
+
+            const link =
+                document.querySelector(
+                    "link[rel~='icon']"
+                ) ||
+                document.createElement(
+                    "link"
+                );
+
+            link.rel = "icon";
+            link.href = icon;
+
+            document.head.appendChild(
+                link
+            );
+
+            localStorage.setItem(
+                "cloakIcon",
+                icon
+            );
+        }
+    }
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            const title =
+                localStorage.getItem(
+                    "cloakTitle"
+                );
+
+            const icon =
+                localStorage.getItem(
+                    "cloakIcon"
+                );
+
+            if (title) {
+
+                document.title =
+                    title;
+
+                document.getElementById(
+                    "titleInput"
+                ).value =
+                    title;
+            }
+
+            if (icon) {
+
+                document.getElementById(
+                    "iconInput"
+                ).value =
+                    icon;
+            }
+        }
+    );
+
+</script>
+
+<!-- =========================
+     ABOUT:BLANK
+========================= -->
+
+<script>
+
+    function openBlank() {
+
+        const win =
+            window.open(
+                "about:blank",
+                "_blank"
+            );
+
+        if (!win) {
+
+            alert("Popup blocked");
+            return;
+        }
+
+        const iframe =
+            win.document.createElement(
+                "iframe"
+            );
+
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+
+        iframe.src =
+            location.href;
+
+        win.document.body.style.margin =
+            "0";
+
+        win.document.body.appendChild(
+            iframe
+        );
+    }
+
+</script>
+
+<!-- =========================
+     INTRO OVERLAY
+========================= -->
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            const overlay =
+                document.getElementById(
+                    "overlay"
+                );
+
+            if (!overlay) return;
+
+            function closeSplash() {
+
+                overlay.classList.add(
+                    "hide"
+                );
+
+                setTimeout(
+                    () => {
+                        overlay.remove();
+                    },
+                    600
+                );
+            }
+
+            overlay.addEventListener(
+                "click",
+                closeSplash
+            );
+        }
+    );
+
+</script>
+
+<!-- =========================
+     PRIVACY / INACTIVE TAB
+========================= -->
+
+<div id="inactiveOverlay"></div>
+
+<script>
+
+    const inactiveOverlay =
+        document.getElementById(
+            "inactiveOverlay"
+        );
+
+    function updateInactiveOverlay() {
+
+        if (document.hidden) {
+
+            inactiveOverlay.classList.add(
+                "active"
+            );
+
+        } else {
+
+            inactiveOverlay.classList.remove(
+                "active"
+            );
+        }
+    }
+
+    document.addEventListener(
+        "visibilitychange",
+        updateInactiveOverlay
+    );
+
+    window.addEventListener(
+        "blur",
+        () => {
+
+            inactiveOverlay.classList.add(
+                "active"
+            );
+        }
+    );
+
+    window.addEventListener(
+        "focus",
+        () => {
+
+            if (!document.hidden) {
+
+                inactiveOverlay.classList.remove(
+                    "active"
+                );
+            }
+        }
+    );
+
+    updateInactiveOverlay();
+
+</script>
+
+
+</body>
+</html>
