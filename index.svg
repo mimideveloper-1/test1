@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%"
+     height="100%"
+     viewBox="0 0 1440 900"
+     preserveAspectRatio="xMidYMid meet">
+
+  <foreignObject width="100%" height="100%">
+
+    <div xmlns="http://www.w3.org/1999/xhtml" id="app">
+
+      <style><![CDATA[
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          background: #f7f7f8;
+          color: #222;
+          line-height: 1.6;
+        }
+
+        #app {
+          width: 100%;
+          min-height: 100vh;
+          background: #f7f7f8;
+        }
+
+
+        /* NAVIGATION */
+
+        nav {
+          min-height: 70px;
+          width: 100%;
+          background: white;
+          border-bottom: 1px solid #e5e5e5;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 7%;
+
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
+
+        .logo {
+          font-size: 27px;
+          font-weight: bold;
+          color: #222;
+          text-decoration: none;
+          letter-spacing: -1px;
+
+          display: flex;
+          align-items: center;
+          gap: 9px;
+        }
+
+        .logo-icon {
+          width: 30px;
+          height: 30px;
+          flex-shrink: 0;
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .nav-links a {
+          color: #555;
+          text-decoration: none;
+          font-size: 15px;
+          white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+          color: #111;
+        }
+
+        .login {
+          padding: 8px 16px;
+          border: 1px solid #ddd;
+          border-radius: 7px;
+        }
+
+        .signup {
+          padding: 9px 17px;
+          background: #222;
+          color: white !important;
+          border-radius: 7px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+          max-width: 1100px;
+          margin: auto;
+          padding: 100px 30px 70px;
+          text-align: center;
+        }
+
+        .hero-icon {
+          width: 68px;
+          height: 68px;
+          margin-bottom: 22px;
+        }
+
+        .hero h1 {
+          font-size: clamp(42px, 6vw, 68px);
+          letter-spacing: -3px;
+          line-height: 1.05;
+          max-width: 850px;
+          margin: auto;
+        }
+
+        .hero p {
+          max-width: 680px;
+          margin: 25px auto;
+          font-size: 18px;
+          color: #666;
+        }
+
+        .hero-buttons {
+          margin-top: 35px;
+
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .primary-button,
+        .secondary-button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 9px;
+
+          padding: 14px 24px;
+          border-radius: 8px;
+
+          text-decoration: none;
+          font-weight: bold;
+        }
+
+        .primary-button {
+          background: #222;
+          color: white;
+        }
+
+        .primary-button:hover {
+          background: #444;
+        }
+
+        .secondary-button {
+          background: white;
+          color: #333;
+          border: 1px solid #ddd;
+        }
+
+        .secondary-button:hover {
+          background: #f2f2f2;
+        }
+
+        .button-icon {
+          width: 19px;
+          height: 19px;
+        }
+
+
+        /* QUICK ACCESS */
+
+        .quick-access {
+          max-width: 1100px;
+          margin: auto;
+          padding: 10px 30px 90px;
+        }
+
+        .section-title {
+          text-align: center;
+          margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+          font-size: 30px;
+          letter-spacing: -1px;
+        }
+
+        .section-title p {
+          color: #777;
+          margin-top: 8px;
+        }
+
+        .tools-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+
+        .tool-card {
+          background: white;
+
+          border: 1px solid #e6e6e6;
+          border-radius: 12px;
+
+          padding: 25px;
+
+          text-decoration: none;
+          color: #222;
+        }
+
+        .tool-card:hover {
+          transform: translateY(-4px);
+          border-color: #bbb;
+          box-shadow: 0 8px 25px rgba(0,0,0,.07);
+        }
+
+        .tool-icon {
+          width: 38px;
+          height: 38px;
+          margin-bottom: 17px;
+        }
+
+        .tool-card h3 {
+          font-size: 18px;
+          margin-bottom: 7px;
+        }
+
+        .tool-card p {
+          color: #777;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+
+        /* FEATURES */
+
+        .features {
+          max-width: 1100px;
+          margin: auto;
+
+          padding: 30px 30px 100px;
+
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+        }
+
+        .feature {
+          background: white;
+          padding: 30px;
+
+          border: 1px solid #e6e6e6;
+          border-radius: 12px;
+        }
+
+        .feature-icon {
+          width: 42px;
+          height: 42px;
+          margin-bottom: 16px;
+        }
+
+        .feature h2 {
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+
+        .feature p {
+          color: #666;
+          font-size: 15px;
+        }
+
+
+        /* LEARNING */
+
+        .learning {
+          background: white;
+
+          border-top: 1px solid #e6e6e6;
+          border-bottom: 1px solid #e6e6e6;
+
+          padding: 90px 30px;
+        }
+
+        .learning-content {
+          max-width: 850px;
+          margin: auto;
+          text-align: center;
+        }
+
+        .learning-icon {
+          width: 52px;
+          height: 52px;
+          margin-bottom: 20px;
+        }
+
+        .learning h2 {
+          font-size: 38px;
+          letter-spacing: -1px;
+          margin-bottom: 20px;
+        }
+
+        .learning p {
+          color: #666;
+          font-size: 17px;
+          margin-bottom: 18px;
+        }
+
+
+        /* STATS */
+
+        .stats {
+          max-width: 1000px;
+          margin: auto;
+
+          padding: 90px 30px;
+
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+
+          text-align: center;
+          gap: 30px;
+        }
+
+        .stat-icon {
+          width: 36px;
+          height: 36px;
+          margin-bottom: 12px;
+        }
+
+        .stat h2 {
+          font-size: 40px;
+          letter-spacing: -2px;
+        }
+
+        .stat p {
+          color: #777;
+          margin-top: 5px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+          background: #222;
+          color: white;
+          padding: 50px 7%;
+        }
+
+        .footer-content {
+          max-width: 1100px;
+          margin: auto;
+
+          display: flex;
+          justify-content: space-between;
+
+          gap: 30px;
+          flex-wrap: wrap;
+        }
+
+        .footer-brand h2 {
+          font-size: 25px;
+          margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+          color: #aaa;
+          max-width: 450px;
+        }
+
+        .footer-links {
+          display: flex;
+          gap: 25px;
+          flex-wrap: wrap;
+        }
+
+        .footer-links a {
+          color: #aaa;
+          text-decoration: none;
+        }
+
+        .footer-links a:hover {
+          color: white;
+        }
+
+        .footer-bottom {
+          max-width: 1100px;
+          margin: 40px auto 0;
+
+          padding-top: 20px;
+          border-top: 1px solid #444;
+
+          color: #888;
+          font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 950px) {
+
+          .tools-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+        }
+
+        @media (max-width: 750px) {
+
+          nav {
+            padding: 14px 20px;
+            gap: 15px;
+          }
+
+          .nav-links {
+            gap: 10px;
+          }
+
+          .nav-links a:not(.login):not(.signup) {
+            display: none;
+          }
+
+          .hero {
+            padding: 70px 20px;
+          }
+
+          .features {
+            grid-template-columns: 1fr;
+          }
+
+          .stats {
+            grid-template-columns: 1fr;
+          }
+
+          .learning {
+            padding: 70px 20px;
+          }
+
+        }
+
+        @media (max-width: 500px) {
+
+          .tools-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .login {
+            display: none;
+          }
+
+          .hero h1 {
+            letter-spacing: -2px;
+          }
+
+        }
+
+      ]]></style>
+
+
+      <!-- NAVIGATION -->
+
+      <nav>
+
+        <a href="index.svg" class="logo">
+
+          <svg class="logo-icon"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="2">
+
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+
+          </svg>
+
+          Learnly
+
+        </a>
+
+
+        <div class="nav-links">
+
+          <a href="#features">Features</a>
+
+          <a href="#learning">Learning</a>
+
+          <a href="flashcards.svg">Flashcards</a>
+
+          <a href="quizzes.svg">Quizzes</a>
+
+          <a href="progress.svg">Progress</a>
+
+          <a href="login.svg" class="login">Log in</a>
+
+          <a href="signup.svg" class="signup">Get started</a>
+
+        </div>
+
+      </nav>
+
+
+      <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+          <svg class="hero-icon"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="#222"
+               stroke-width="1.7">
+
+            <path d="M12 2a7 7 0 0 0-4 12.74V18h8v-3.26A7 7 0 0 0 12 2z"/>
+            <path d="M9 21h6"/>
+            <path d="M10 18h4"/>
+
+          </svg>
+
+
+          <h1>
+            Learn smarter.<br/>
+            Remember more.
+          </h1>
+
+
+          <p>
+            Create flashcards, take quizzes, track your progress with
+            advanced analytics, and master any subject with confidence.
+            Online learning tools for K-12, college, and lifelong learners.
+          </p>
+
+
+          <div class="hero-buttons">
+
+            <a href="flashcards.svg" class="primary-button">
+
+              <svg class="button-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2">
+
+                <path d="M12 5v14"/>
+                <path d="M5 12h14"/>
+
+              </svg>
+
+              Start studying
+
+            </a>
+
+
+            <a href="#tools" class="secondary-button">
+
+              <svg class="button-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2">
+
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4"/>
+                <path d="M12 8h.01"/>
+
+              </svg>
+
+              Explore Learnly
+
+            </a>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- TOOLS -->
+
+        <section class="quick-access" id="tools">
+
+          <div class="section-title">
+
+            <h2>Start learning</h2>
+
+            <p>
+              Choose a tool and jump straight into studying.
+            </p>
+
+          </div>
+
+
+          <div class="tools-grid">
+
+
+            <a href="flashcards.svg" class="tool-card">
+
+              <svg class="tool-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="#222"
+                   stroke-width="1.8">
+
+                <rect x="4" y="6" width="14" height="12" rx="2"/>
+                <path d="M8 4h10a2 2 0 0 1 2 2v10"/>
+
+              </svg>
+
+              <h3>Flashcards</h3>
+
+              <p>
+                Create and study flashcard sets for any subject.
+              </p>
+
+            </a>
+
+
+            <a href="quizzes.svg" class="tool-card">
+
+              <svg class="tool-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="#222"
+                   stroke-width="1.8">
+
+                <rect x="5" y="3" width="14" height="18" rx="2"/>
+                <path d="M9 8h6"/>
+                <path d="M9 12h6"/>
+                <path d="M9 16h4"/>
+
+              </svg>
+
+              <h3>Quizzes</h3>
+
+              <p>
+                Test your knowledge and practice important topics.
+              </p>
+
+            </a>
+
+
+            <a href="progress.svg" class="tool-card">
+
+              <svg class="tool-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="#222"
+                   stroke-width="1.8">
+
+                <path d="M3 3v18h18"/>
+                <path d="M7 15l4-4 3 3 5-6"/>
+
+              </svg>
+
+              <h3>Progress</h3>
+
+              <p>
+                See your study activity and track your improvement.
+              </p>
+
+            </a>
+
+
+            <a href="signup.svg" class="tool-card">
+
+              <svg class="tool-icon"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="#222"
+                   stroke-width="1.8">
+
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+
+              </svg>
+
+              <h3>Create an account</h3>
+
+              <p>
+                Sign up to start building your learning experience.
+              </p>
+
+            </a>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- FEATURES -->
+
+        <section class="features" id="features">
+
+
+          <article class="feature">
+
+            <svg class="feature-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <rect x="4" y="6" width="14" height="12" rx="2"/>
+              <path d="M8 4h10a2 2 0 0 1 2 2v10"/>
+
+            </svg>
+
+            <h2>Flashcards</h2>
+
+            <p>
+              Create your own flashcard sets or organize your study
+              materials into subjects that are easy to review whenever
+              you need them.
+            </p>
+
+          </article>
+
+
+          <article class="feature">
+
+            <svg class="feature-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <path d="M4 4h16v16H4z"/>
+              <path d="M8 8l2 2 4-4"/>
+              <path d="M8 15h8"/>
+
+            </svg>
+
+            <h2>Practice Quizzes</h2>
+
+            <p>
+              Test what you know with quizzes designed to help you
+              practice, review important topics, and find what needs
+              more attention.
+            </p>
+
+          </article>
+
+
+          <article class="feature">
+
+            <svg class="feature-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <path d="M3 3v18h18"/>
+              <path d="M7 15l4-4 3 3 5-6"/>
+
+            </svg>
+
+            <h2>Track Progress</h2>
+
+            <p>
+              Follow your learning progress and see how your study
+              habits improve over time with simple, useful analytics.
+            </p>
+
+          </article>
+
+
+        </section>
+
+
+
+        <!-- LEARNING -->
+
+        <section class="learning" id="learning">
+
+          <div class="learning-content">
+
+            <svg class="learning-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.7">
+
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+
+            </svg>
+
+
+            <h2>
+              Everything you need to keep learning
+            </h2>
+
+
+            <p>
+              Learnly brings your study tools together in one place.
+              Create study sets, practice with quizzes, and keep track
+              of the subjects you're working on.
+            </p>
+
+
+            <p>
+              Whether you're studying for a test, learning something new,
+              or reviewing material for school, Learnly gives you a
+              simple way to stay organized and focused.
+            </p>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+
+          <div class="stat">
+
+            <svg class="stat-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <path d="M4 19V5l8-3 8 3v14"/>
+              <path d="M8 22v-6h8v6"/>
+              <path d="M8 8h.01"/>
+              <path d="M16 8h.01"/>
+              <path d="M8 12h.01"/>
+              <path d="M16 12h.01"/>
+
+            </svg>
+
+            <h2>K-12</h2>
+
+            <p>
+              Tools for every grade and subject
+            </p>
+
+          </div>
+
+
+          <div class="stat">
+
+            <svg class="stat-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <path d="M3 6l9-4 9 4-9 4-9-4z"/>
+              <path d="M7 9v5c0 2 2.5 4 5 4s5-2 5-4V9"/>
+              <path d="M21 6v7"/>
+
+            </svg>
+
+            <h2>College</h2>
+
+            <p>
+              Study smarter for your courses
+            </p>
+
+          </div>
+
+
+          <div class="stat">
+
+            <svg class="stat-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="#222"
+                 stroke-width="1.8">
+
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+
+            </svg>
+
+            <h2>Lifelong</h2>
+
+            <p>
+              Keep learning at any age
+            </p>
+
+          </div>
+
+
+        </section>
+
+
+      </main>
+
+
+
+      <!-- FOOTER -->
+
+      <footer>
+
+        <div class="footer-content">
+
+
+          <div class="footer-brand">
+
+            <h2>Learnly</h2>
+
+            <p>
+              Create flashcards, take quizzes, track your progress,
+              and master any subject with confidence.
+            </p>
+
+          </div>
+
+
+          <div class="footer-links">
+
+            <a href="flashcards.svg">Flashcards</a>
+
+            <a href="quizzes.svg">Quizzes</a>
+
+            <a href="progress.svg">Progress</a>
+
+            <a href="about.svg">About</a>
+
+            <a href="privacy.svg">Privacy</a>
+
+            <a href="terms.svg">Terms</a>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          © 2026 Learnly. All rights reserved.
+
+        </div>
+
+      </footer>
+
+
+    </div>
+
+  </foreignObject>
+
+</svg>
